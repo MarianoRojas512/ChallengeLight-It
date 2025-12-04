@@ -3,15 +3,15 @@ import { Locator, Page } from '@playwright/test';
 export class HomePage {
   readonly page: Page;
 
-  readonly homeIcon : Locator;
-  readonly cartMenu : Locator;
-  readonly phonesCategory : Locator;
-  readonly laptopsCategory : Locator;
-  readonly monitorsCategory : Locator;
-  readonly carouselFirstSlide : Locator;
-  readonly carouselNextButton : Locator;
-  readonly carouselPreviousButton : Locator;
-  readonly productsList : (name: string) => Locator;
+  readonly homeIcon: Locator;
+  readonly cartMenu: Locator;
+  readonly phonesCategory: Locator;
+  readonly laptopsCategory: Locator;
+  readonly monitorsCategory: Locator;
+  readonly carouselFirstSlide: Locator;
+  readonly carouselNextButton: Locator;
+  readonly carouselPreviousButton: Locator;
+  readonly productsList: (name: string) => Locator;
 
   constructor(page: Page) {
     this.page = page;

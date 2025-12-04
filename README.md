@@ -67,3 +67,11 @@ npm install
 npx playwright test
 npx playwright test --ui
 npx playwright codegen https://www.demoblaze.com/
+```
+
+## ▶How to View the Playwright Test Report
+After running your tests, a detailed HTML test report can be generated and viewed with:
+
+```bash
+npx playwright show-report
+```

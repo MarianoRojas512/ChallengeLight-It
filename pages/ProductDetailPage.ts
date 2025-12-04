@@ -3,8 +3,8 @@ import { Locator, Page } from '@playwright/test';
 export class ProductDetailPage {
   readonly page: Page;
 
-  readonly addToCartButton : Locator;
-  readonly productName : (name: string) => Locator;
+  readonly addToCartButton: Locator;
+  readonly productName: (name: string) => Locator;
 
   constructor(page: Page) {
     this.page = page;

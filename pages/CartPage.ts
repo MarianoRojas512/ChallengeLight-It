@@ -5,16 +5,16 @@ export class CartPage {
   readonly page: Page;
 
   readonly placeOrderButton: Locator;
-  readonly placeOrderHeading : Locator;
-  readonly totalTextbox : Locator;
-  readonly countryTextbox : Locator;
-  readonly cityTextbox : Locator;
-  readonly creditCardTextbox : Locator;
-  readonly monthTextbox : Locator;
-  readonly yearTextbox : Locator;
-  readonly purchaseButton : Locator;
-  readonly thankYouHeading : Locator;
-  readonly okButton : Locator;
+  readonly placeOrderHeading: Locator;
+  readonly totalTextbox: Locator;
+  readonly countryTextbox: Locator;
+  readonly cityTextbox: Locator;
+  readonly creditCardTextbox: Locator;
+  readonly monthTextbox: Locator;
+  readonly yearTextbox: Locator;
+  readonly purchaseButton: Locator;
+  readonly thankYouHeading: Locator;
+  readonly okButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -30,7 +30,6 @@ export class CartPage {
     this.totalTextbox = page.getByRole('textbox', { name: 'Total: Name:' });
     this.thankYouHeading = page.getByRole('heading', { name: 'Thank you for your purchase!' });
     this.okButton = page.getByRole('button', { name: 'OK' });
-
   }
 
   async placeOrder() {
@@ -100,15 +99,15 @@ export class CartPage {
     return total;
   }
 
-async getDisplayedTotal(): Promise<number> {
-  const totalValueLocator = this.page.locator('#totalp');
-  await totalValueLocator.waitFor({ state: 'visible' });
+  async getDisplayedTotal(): Promise<number> {
+    const totalValueLocator = this.page.locator('#totalp');
+    await totalValueLocator.waitFor({ state: 'visible' });
 
-  const totalText = await totalValueLocator.textContent();
-  const total = parseInt(totalText ?? '0', 10);
-  console.log(`Displayed total found: ${total}`);
-  return total;
-}
+    const totalText = await totalValueLocator.textContent();
+    const total = parseInt(totalText ?? '0', 10);
+    console.log(`Displayed total found: ${total}`);
+    return total;
+  }
 
   async verifyTotal(productPrices: Record<string, number>): Promise<void> {
     const calculatedTotal = await this.calculateTotalFromProductMap(productPrices);
@@ -121,12 +120,12 @@ async getDisplayedTotal(): Promise<number> {
     }
   }
 
-async fillPurchaseModalWithBlanks() {
-  await this.totalTextbox.fill(' ');
-  await this.countryTextbox.fill(' ');
-  await this.cityTextbox.fill(' ');
-  await this.creditCardTextbox.fill(' ');
-  await this.monthTextbox.fill(' ');
-  await this.yearTextbox.fill(' ');
-}
+  async fillPurchaseModalWithBlanks() {
+    await this.totalTextbox.fill(' ');
+    await this.countryTextbox.fill(' ');
+    await this.cityTextbox.fill(' ');
+    await this.creditCardTextbox.fill(' ');
+    await this.monthTextbox.fill(' ');
+    await this.yearTextbox.fill(' ');
+  }
 }
