@@ -62,8 +62,15 @@ The expected behavior is documented in the assertions.)*
 ---
 
 ## ▶How to Run the Tests
+
+### Setup (First Time)
 ```bash
 npm install
+npx playwright install
+```
+
+### Run Tests
+```bash
 npx playwright test
 npx playwright test --ui
 npx playwright codegen https://www.demoblaze.com/
