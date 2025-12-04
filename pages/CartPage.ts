@@ -78,4 +78,55 @@ export class CartPage {
   async okButtonClick() {
     await this.okButton.click();
   }
+
+  async getProductNamesInCart(): Promise<string[]> {
+    const rows = this.page.locator('#tbodyid tr');
+    await rows.first().waitFor({ state: 'visible' });
+    return await rows.locator('td:nth-child(2)').allTextContents();
+  }
+
+  async calculateTotalFromProductMap(productPrices: Record<string, number>): Promise<number> {
+    const productsInCart = await this.getProductNamesInCart();
+    let total = 0;
+
+    for (const productName of productsInCart) {
+      const price = productPrices[productName];
+      if (price !== undefined) {
+        total += price;
+      } else {
+        throw new Error(`Price not found for product: ${productName}`);
+      }
+    }
+    return total;
+  }
+
+async getDisplayedTotal(): Promise<number> {
+  const totalValueLocator = this.page.locator('#totalp');
+  await totalValueLocator.waitFor({ state: 'visible' });
+
+  const totalText = await totalValueLocator.textContent();
+  const total = parseInt(totalText ?? '0', 10);
+  console.log(`Displayed total found: ${total}`);
+  return total;
+}
+
+  async verifyTotal(productPrices: Record<string, number>): Promise<void> {
+    const calculatedTotal = await this.calculateTotalFromProductMap(productPrices);
+    const displayedTotal = await this.getDisplayedTotal();
+
+    if (calculatedTotal !== displayedTotal) {
+      throw new Error(
+        `Total mismatch: Calculated total is ${calculatedTotal}, but displayed total is ${displayedTotal}`
+      );
+    }
+  }
+
+async fillPurchaseModalWithBlanks() {
+  await this.totalTextbox.fill(' ');
+  await this.countryTextbox.fill(' ');
+  await this.cityTextbox.fill(' ');
+  await this.creditCardTextbox.fill(' ');
+  await this.monthTextbox.fill(' ');
+  await this.yearTextbox.fill(' ');
+}
 }
